@@ -146,3 +146,27 @@ test_that("2 + 2 equals 5", {
 })
 
 
+
+
+# test_that with the example of checking the matrix
+
+# Every row of every transition matrix must sum to 1.
+# The matrix has four dimensions: PSA samples, treatment, current health state, health state you move to.
+# apply() with MARGIN = c(1, 2, 3) keeps dimensions 1, 2 and 3 and sums over
+# dimension 4 (the "move to" state).
+test_that("rows of all transition matrices sum to 1", {
+  row_sums <- apply(transition_matrix, c(1, 2, 3), sum)
+  # now compare this vector of values, with ones of the same length
+  expect_equal(as.vector(row_sums), rep(1, length(row_sums)))
+})
+
+
+# Additional checks
+
+test_that("all transition probabilities are between 0 and 1", {
+  expect_true(all(transition_matrix >= 0 & transition_matrix <= 1))
+})
+
+test_that("transition matrix has no missing values", {
+  expect_false(anyNA(transition_matrix))
+})
