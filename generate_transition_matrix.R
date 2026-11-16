@@ -50,7 +50,7 @@ generate_transition_matrix <- function(input_parameters) {
 	    # And ensure those without event stay in the same state
 	    transition_matrix[, i_treatment, i_state, i_state] <- 
 	      transition_matrix[, i_treatment, i_state, i_state] +
-	      1 - mean(transition_matrix[, i_treatment, i_state, ])
+	      1 - rowSums(transition_matrix[, i_treatment, i_state, ])
 	      	  } # End loop over states
 	  # Set transitions away from dead to 0 and from dead to dead to 1 (absorbing state)
     transition_matrix[, i_treatment, "Dead", ] <- 0
