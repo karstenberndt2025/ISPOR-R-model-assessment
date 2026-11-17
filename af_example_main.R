@@ -50,6 +50,14 @@ n_wtp_UK    <- 25000 # add willingness to pay threshold
 # This will be converted into transition matrix, state costs, and state utilities
 input_parameters <- generate_input_parameters(n_samples = n_samples)
 
+# Exercise 1: inspect the input parameters
+dim(input_parameters)        # 1000 Zeilen (Simulationen) x 44 Spalten (Parameter)
+colnames(input_parameters)
+
+# Gespeichert ist der Log-HR, also zurückrechnen mit exp():
+mean(exp(input_parameters[, "Log HR Apixaban Stroke"]))
+mean(exp(input_parameters[, "Log HR Dabigatran Stroke"]))
+
 # Run the Markov model to get the model outputs
 model_outputs <- generate_model_outputs(input_parameters, 
                                         initial_age = initial_age, 
