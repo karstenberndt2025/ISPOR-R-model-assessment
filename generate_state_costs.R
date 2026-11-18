@@ -19,7 +19,7 @@ generate_state_costs<-function(input_parameters) {
 		# First add the treatment costs (applies to all states except death)
 		state_costs[, i_treatment, 1:(n_states - 1)] <-
 		  input_parameters[, grep(paste(treatment_names[i_treatment], "cost"), 
-		                          colnames(input_parameters))] / 4 # 3 month cycle
+		                          colnames(input_parameters))] # already per 3-month cycle (see generate_input_parameters.R)
 
 		# Then add acute event costs (same for all states except death)
 		# Acute event costs are averaged over all events
